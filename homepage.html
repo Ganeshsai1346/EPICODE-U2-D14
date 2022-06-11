@@ -61,7 +61,7 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      window.onload = async (products) => {
+      const displayProducts = async (event) => {
         try {
           const options = {
             method: "GET",
@@ -80,11 +80,11 @@
           console.log(products);
           const ul = document.getElementById("currentProducts");
 
-          products.forEach((myItems) => {
+          products.forEach((product) => {
             const li = document.createElement("li");
             li.className =
               "list-group-item d-flex justify-content-between align-items-center";
-            li.innerHTML = `<span> ${myItems.name}</span><span class="badge badge-dark mr-2>${myItems.brand}</span><span>${myItems.price}€</span><span>${myItems.image}<a href="#">View Details</a></span>`;
+            li.innerHTML = `<span> ${product.name}</span><span class="badge badge-dark mr-2>${product.brand}</span><span>${product.price}€</span><span>${product.image}<a href="#">View Details</a></span>`;
 
             ul.appendChild(li);
           });
