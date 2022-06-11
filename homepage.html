@@ -6,14 +6,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CRUDAZON</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
       integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="style.css" />
+    <title>CRUDAZON</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -46,10 +45,8 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-6">
-          <h2 class="mt-5 mb-3">added products</h2>
-          <ul id="currentProducts">
-            <li>Product name</li>
-          </ul>
+          <h2 class="mt-5 mb-3">Added products</h2>
+          <ul id="currentProducts" class="list-group"></ul>
         </div>
       </div>
     </div>
@@ -63,6 +60,38 @@
       integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
       crossorigin="anonymous"
     ></script>
-    <script src="/homepage.js"></script>
+    <script>
+      window.onload = async (products) => {
+        try {
+          const options = {
+            method: "GET",
+            headers: {
+              Authorization:
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmEzM2RmMDdmZmQ0OTAwMTU4YTdhOWEiLCJpYXQiOjE2NTQ4NjUzOTMsImV4cCI6MTY1NjA3NDk5M30.2OFqiZlYFI8_pway6VuyyVMq_FoFqoK3aOgNgDlGntw",
+
+              "Content-Type": "application/json",
+            },
+          };
+          const response = await fetch(
+            "https://striveschool-api.herokuapp.com/api/product/",
+            options
+          );
+          const products = await response.json();
+          console.log(products);
+          const ul = document.getElementById("currentProducts");
+
+          products.forEach((myItems) => {
+            const li = document.createElement("li");
+            li.className =
+              "list-group-item d-flex justify-content-between align-items-center";
+            li.innerHTML = `<span> ${myItems.name}</span><span class="badge badge-dark mr-2>${myItems.brand}</span><span>${myItems.price}€</span><span>${myItems.image}<a href="#">View Details</a></span>`;
+
+            ul.appendChild(li);
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    </script>
   </body>
 </html>
