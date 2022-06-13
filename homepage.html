@@ -61,15 +61,14 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      const displayProducts = async (event) => {
+      const displayProducts = async (product) => {
         try {
           const options = {
             method: "GET",
             headers: {
-              Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmEzM2RmMDdmZmQ0OTAwMTU4YTdhOWEiLCJpYXQiOjE2NTQ4NjUzOTMsImV4cCI6MTY1NjA3NDk5M30.2OFqiZlYFI8_pway6VuyyVMq_FoFqoK3aOgNgDlGntw",
-
               "Content-Type": "application/json",
+              "Authorization":
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmEzM2RmMDdmZmQ0OTAwMTU4YTdhOWEiLCJpYXQiOjE2NTQ4NjUzOTMsImV4cCI6MTY1NjA3NDk5M30.2OFqiZlYFI8_pway6VuyyVMq_FoFqoK3aOgNgDlGntw",
             },
           };
           const response = await fetch(
@@ -77,20 +76,24 @@
             options
           );
           const products = await response.json();
-          console.log(products);
+
           const ul = document.getElementById("currentProducts");
 
           products.forEach((product) => {
             const li = document.createElement("li");
             li.className =
               "list-group-item d-flex justify-content-between align-items-center";
-            li.innerHTML = `<span> ${product.name}</span><span class="badge badge-dark mr-2>${product.brand}</span><span>${product.price}€</span><span>${product.image}<a href="#">View Details</a></span>`;
+            li.innerHTML = `<span> ${product.name}</span> <span class=flex-shrink-0><span class="badge badge-dark mr-2>${product.brand}</span><span>${product.price}€</span><span>${product.imageUrl}<a href="#">View Details</a></span>`;
 
             ul.appendChild(li);
           });
         } catch (error) {
           console.log(error);
         }
+      };
+
+      window.onload = () => {
+        displayProducts();
       };
     </script>
   </body>

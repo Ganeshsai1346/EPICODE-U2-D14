@@ -115,22 +115,22 @@
     ></script>
     <script>
       const handleSubmit = async (event) => {
-        event.preventDefault();
-        const products = {
-          name: document.getElementById("name").value,
-          description: document.getElementById("description").value,
-          brand: document.getElementById("brand").value,
-          price: parseInt(document.getElementById("price").value),
-          imageUrl: document.getElementById("imageUrl").value,
-        };
         try {
+          event.preventDefault();
+          const items = {
+            name: document.getElementById("name").value,
+            description: document.getElementById("description").value,
+            brand: document.getElementById("brand").value,
+            price: parseInt(document.getElementById("price").value),
+            imageUrl: document.getElementById("imageUrl").value,
+          };
           const options = {
             method: "POST",
-            body: JSON.stringify(products),
+            body: JSON.stringify(items),
             headers: {
-              Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmEyMmM0MWZmNDNiNTAwMTUwYWYwMTciLCJpYXQiOjE2NTQ3OTUzMzAsImV4cCI6MTY1NjAwNDkzMH0.oqnJezsnkJyrjXJoPOn6HGVeA1kn-ZYC_PRnYyeRAqI",
               "Content-Type": "application/json",
+              "Authorization":
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmEzM2RmMDdmZmQ0OTAwMTU4YTdhOWEiLCJpYXQiOjE2NTQ4NjUzOTMsImV4cCI6MTY1NjA3NDk5M30.2OFqiZlYFI8_pway6VuyyVMq_FoFqoK3aOgNgDlGntw",
             },
           };
           const response = await fetch(
